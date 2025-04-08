@@ -1,0 +1,84 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Merriweather+Sans:wght@300;400;500;600;700&family=Hind+Madurai:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    font-family: 'Merriweather Sans', sans-serif;
+  }
+  
+  body {
+    @apply text-gray-900 bg-white;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-poppins font-bold tracking-tight;
+  }
+
+  button, a, nav, footer {
+    @apply font-hind;
+  }
+}
+
+@layer components {
+  .container {
+    @apply max-w-7xl mx-auto;
+  }
+
+  .btn {
+    @apply inline-flex items-center justify-center font-medium transition-colors;
+  }
+
+  .btn-primary {
+    @apply bg-primary text-white hover:bg-primary-hover;
+  }
+
+  .btn-outline {
+    @apply border-2 border-gray-300 text-gray-700 hover:border-primary hover:text-primary;
+  }
+
+  .btn-white {
+    @apply bg-white text-primary hover:bg-primary-light;
+  }
+
+  .input {
+    @apply w-full px-4 py-2 border border-gray-300 transition-colors focus:ring-2 focus:ring-primary focus:border-primary;
+  }
+
+  .card {
+    @apply bg-white overflow-hidden;
+  }
+
+  .card-interactive {
+    @apply hover:shadow-lg hover:scale-[1.02] transition-all duration-200;
+  }
+
+  .card-bordered {
+    @apply border border-gray-100;
+  }
+}
+
+@keyframes gradient-animation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.premium-text-gradient {
+  background: linear-gradient(to right, #ffffff, #e1edf7, #ffffff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  background-size: 200% auto;
+  animation: gradient-animation 4s linear infinite;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}

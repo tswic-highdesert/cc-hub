@@ -13,15 +13,6 @@ interface FormData {
   interests: string[];
 }
 
-const redirectUrls = {
-  'private-offices': 'https://example.com/private-offices',
-  'coworking-space': 'https://example.com/coworking',
-  'meeting-rooms': 'https://example.com/meeting-rooms',
-  'think-lounge': 'https://example.com/think-lounge',
-  'partnership': 'https://example.com/partnership',
-  'podcast-production': 'https://example.com/podcast'
-};
-
 const services = [
   {
     icon: Building2,
@@ -63,6 +54,8 @@ const services = [
 
 export const ContactForm: React.FC = () => {
   const [isSubmitting, setIsSubmitting] = React.useState(false);
+  const [successMessage, setSuccessMessage] = React.useState<string | null>(null);
+  const [errorMessage, setErrorMessage] = React.useState<string | null>(null);
   const [formData, setFormData] = React.useState<FormData>({
     name: '',
     email: '',
@@ -73,6 +66,8 @@ export const ContactForm: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
+    setErrorMessage(null);
+    setSuccessMessage(null);
 
     try {
       const response = await fetch('https://services.leadconnectorhq.com/hooks/Cxq3wlhbzAsZ3mqstz89/webhook-trigger/8361e585-dd47-4075-aa75-3339d20fde5b', {
@@ -87,15 +82,17 @@ export const ContactForm: React.FC = () => {
         throw new Error('Network response was not ok');
       }
 
-      // Redirect based on first selected interest
-      if (formData.interests.length > 0) {
-        const redirectUrl = redirectUrls[formData.interests[0] as keyof typeof redirectUrls];
-        if (redirectUrl) {
-          window.location.href = redirectUrl;
-        }
-      }
+      // Show success message and reset form
+      setSuccessMessage('Thank you for your submission! We will be in touch soon.');
+      setFormData({
+        name: '',
+        email: '',
+        phone: '',
+        interests: []
+      });
     } catch (error) {
       console.error('Error submitting form:', error);
+      setErrorMessage('There was a problem submitting your request. Please try again later.');
     } finally {
       setIsSubmitting(false);
     }
@@ -118,6 +115,24 @@ export const ContactForm: React.FC = () => {
       onSubmit={handleSubmit}
       className="space-y-6"
     >
+      {successMessage && (
+        <motion.div 
+          variants={fadeIn}
+          className="bg-green-50 border border-green-200 text-green-800 rounded-md p-4 mb-6"
+        >
+          {successMessage}
+        </motion.div>
+      )}
+
+      {errorMessage && (
+        <motion.div 
+          variants={fadeIn}
+          className="bg-red-50 border border-red-200 text-red-800 rounded-md p-4 mb-6"
+        >
+          {errorMessage}
+        </motion.div>
+      )}
+
       <motion.div variants={fadeIn}>
         <label htmlFor="name" className={`block ${typography.body.small} font-medium mb-2`}>
           Name

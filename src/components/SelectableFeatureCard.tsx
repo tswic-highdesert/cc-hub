@@ -24,6 +24,7 @@ export const SelectableFeatureCard: React.FC<SelectableFeatureCardProps> = ({
     <motion.button
       variants={fadeIn}
       onClick={onClick}
+      type="button" // Add this to prevent form submission
       className={`w-full text-left ${animations.hover} ${
         selected
           ? 'bg-primary text-white shadow-lg scale-[1.02]'

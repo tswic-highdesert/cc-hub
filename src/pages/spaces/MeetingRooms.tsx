@@ -94,6 +94,7 @@ const faqs = [
 
 export default function MeetingRooms() {
   const { stories, loading: storiesLoading } = useSuccessStories('meeting-rooms');
+  const navigate = useNavigate(); // Initialize useNavigate
 
   return (
     <Layout>

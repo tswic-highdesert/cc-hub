@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
 import { motion } from 'framer-motion';
 import {
   Coffee,
@@ -126,6 +127,7 @@ const faqs = [
 
 export default function Coworking() {
   const { stories, loading: storiesLoading } = useSuccessStories('coworking');
+  const navigate = useNavigate(); // Initialize useNavigate
 
   return (
     <Layout>
@@ -410,7 +412,7 @@ export default function Coworking() {
             <Button
               variant="white"
               size="lg"
-              onClick={() => window.location.href = '/tour'}
+              onClick={() => navigate('/tour')}
             >
               Schedule Your Tour
             </Button>

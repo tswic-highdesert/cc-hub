@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
 import { motion } from 'framer-motion';
 import {
   Users,
@@ -110,6 +111,7 @@ const faqs = [
 
 export default function EventSpaces() {
   const { stories, loading: storiesLoading } = useSuccessStories('event-spaces');
+  const navigate = useNavigate(); // Initialize useNavigate
 
 
   return (
@@ -284,7 +286,7 @@ export default function EventSpaces() {
             </p>
             <Button
               variant="outline"
-              onClick={() => window.location.href = '/tour'}
+              onClick={() => navigate('/contact')}
             >
               Request Custom Quote
             </Button>
@@ -428,7 +430,7 @@ export default function EventSpaces() {
             <Button
               variant="white"
               size="lg"
-              onClick={() => window.location.href = '/tour'}
+              onClick={() => navigate('/tour')}
             >
               Schedule Consultation
             </Button>

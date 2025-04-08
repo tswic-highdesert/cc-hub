@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
 import { motion } from 'framer-motion';
 import {
   Lock,
@@ -111,7 +112,7 @@ const faqs = [
 
 export default function PrivateOffices() {
   const { stories, loading: storiesLoading } = useSuccessStories('private-offices');
-
+  const navigate = useNavigate(); // Initialize useNavigate
   return (
     <Layout>
       <PageHero
@@ -387,7 +388,7 @@ export default function PrivateOffices() {
             <Button
               variant="white"
               size="lg"
-              onClick={() => window.location.href = '/tour'}
+              onClick={() => navigate('/tour')}
             >
               Book Office Tour
             </Button>

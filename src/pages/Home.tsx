@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
 import {
   ArrowRight,
   Building2,
@@ -60,6 +61,7 @@ const features = [
 
 export default function Home() {
   const { stories, loading: storiesLoading } = useSuccessStories('home');
+  const navigate = useNavigate(); // Initialize useNavigate
 
   return (
     <Layout>
@@ -74,7 +76,7 @@ export default function Home() {
           <Button
             variant="white"
             size="lg"
-            onClick={() => window.location.href = '/tour'}
+            onClick={() => navigate('/tour')} // Use navigate
           >
             Book a Tour
             <ArrowRight className="ml-2 w-5 h-5" />
@@ -83,7 +85,7 @@ export default function Home() {
             variant="outline"
             size="lg"
             className="!text-white !border-white hover:!bg-white hover:!text-[#1f7abc]"
-            onClick={() => window.location.href = '#pricing'}
+            onClick={() => navigate('/#pricing')} // Use navigate (or handle scroll differently if needed)
           >
             View Pricing
           </Button>
@@ -260,7 +262,7 @@ export default function Home() {
 
       {/* Success Stories Section */}
       {!storiesLoading && stories.length > 0 && stories.map((story, index) => (
-        <section className="py-20 bg-gray-50">
+        <section key={index} className="py-20 bg-gray-50"> {/* Added key prop */}
           <div className="container mx-auto px-4">
             <motion.div
               variants={staggerContainer}
@@ -284,7 +286,6 @@ export default function Home() {
             </motion.div>
 
             <UseCase
-              key={index}
               title={story.title}
               description={story.description}
               imageUrl={`https:${story.imageUrl}`}
@@ -295,7 +296,7 @@ export default function Home() {
           </div>
         </section>
       ))}
-      
+
       {/* Blog Section */}
       <section className="py-20 bg-white">
         <div className="container mx-auto px-4">
@@ -323,7 +324,7 @@ export default function Home() {
           <BlogPreviewSection />
         </div>
       </section>
-      
+
       {/* CTA Section */}
       <section className="py-20 bg-[#1f7abc]">
         <motion.div
@@ -343,22 +344,24 @@ export default function Home() {
             <Button
               variant="white"
               size="lg"
-              onClick={() => window.location.href = '/tour'}
+              onClick={() => navigate('/tour')} // Use navigate
             >
               Schedule Your Tour
               <ArrowRight className="ml-2 w-5 h-5" />
-            </Button><Button
+            </Button>
+            <Button
               variant="white"
               size="lg"
-              onClick={() => window.location.href = '/contact'}
+              onClick={() => navigate('/contact')} // Use navigate
             >
               Join Today
               <ArrowRight className="ml-2 w-5 h-5" />
-            </Button><Button
+            </Button>
+            <Button
               variant="outline"
               size="lg"
               className="!text-white !border-white hover:!bg-white hover:!text-[#1f7abc]"
-              onClick={() => window.location.href = '/contact'}
+              onClick={() => navigate('/contact')} // Use navigate
             >
               Contact Us
               <ArrowRight className="ml-2 w-5 h-5" />

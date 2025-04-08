@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
 import { motion } from 'framer-motion';
 import {
   Users,
@@ -233,7 +234,7 @@ export default function MeetingRooms() {
             </p>
             <Button
               variant="outline"
-              onClick={() => window.location.href = '/contact'}
+              onClick={() => navigate('/contact')}
             >
               Inquire About Membership
             </Button>
@@ -377,7 +378,7 @@ export default function MeetingRooms() {
             <Button
               variant="white"
               size="lg"
-              onClick={() => window.location.href = '/contact'}
+              onClick={() => navigate('/contact')}
             >
               Book Meeting Room
             </Button>

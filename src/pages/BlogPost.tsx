@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 import { fadeIn, staggerContainer } from '../animations';
 import { Layout } from '../components/Layout';
 import { useBlogPost } from '../hooks/useBlog';
-import { VideoEmbed } from '../components/VideoEmbed';
+import VideoEmbed from '../components/VideoEmbed';
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 import { BLOCKS, MARKS } from '@contentful/rich-text-types';
 import { RecommendedBlogs } from '../components/RecommendedBlogs';
@@ -171,7 +171,7 @@ export default function BlogPost() {
                 {post.videoUrl && (
                   <div className="mt-8">
                     <VideoEmbed
-                      url={post.videoUrl}
+                      src={post.videoUrl}
                       title={post.title}
                     />
                   </div>

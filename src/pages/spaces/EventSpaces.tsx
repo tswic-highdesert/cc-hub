@@ -203,8 +203,8 @@ export default function EventSpaces() {
             videoTour={{
               title: 'Think Lounge Tour',
               description: 'Take a virtual tour of our versatile event space.',
-              embedUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
-              thumbnailUrl: 'https://images.unsplash.com/photo-1505373877841-8d25f7d46678?auto=format&fit=crop&q=80&w=1200'
+              embedUrl: 'https://www.youtube.com/embed/LhvFx3ipzpM',
+              thumbnailUrl: 'https://i9.ytimg.com/vi_webp/LhvFx3ipzpM/mq2.webp?sqp=CNiy5L8G-oaymwEmCMACELQB8quKqQMa8AEB-AH-CYAC0AWKAgwIABABGGUgUihFMA8=&rs=AOn4CLBXgVWO7HU10skZ9feTK91rkRKAAg'
             }}
           />
         </div>

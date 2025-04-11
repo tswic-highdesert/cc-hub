@@ -19,6 +19,7 @@ import Privacy from './pages/Privacy.tsx';
 import Terms from './pages/Terms.tsx';
 import Podcasts from './pages/spaces/Podcasts.tsx';
 import './index.css';
+import { initGA, logPageView } from './lib/analytics';
 
 // Scroll restoration component
 function ScrollToTop() {
@@ -26,6 +27,7 @@ function ScrollToTop() {
 
   useEffect(() => {
     window.scrollTo(0, 0);
+    logPageView(pathname); // Log page view
   }, [pathname]);
 
   return null;
@@ -189,3 +191,6 @@ createRoot(document.getElementById('root')!).render(
     <RouterProvider router={router} />
   </StrictMode>
 );
+
+// Initialize Google Analytics
+initGA();

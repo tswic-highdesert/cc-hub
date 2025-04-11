@@ -85,7 +85,12 @@ export default function Home() {
             variant="outline"
             size="lg"
             className="!text-white !border-white hover:!bg-white hover:!text-[#1f7abc]"
-            onClick={() => navigate('/#pricing')} // Use navigate (or handle scroll differently if needed)
+            onClick={() => {
+              const pricingSection = document.getElementById('pricing');
+              if (pricingSection) {
+                pricingSection.scrollIntoView({ behavior: 'smooth' });
+              }
+            }} // Use navigate (or handle scroll differently if needed)
           >
             View Pricing
           </Button>

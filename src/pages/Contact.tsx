@@ -2,7 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { fadeIn, staggerContainer } from '../animations';
 import { Layout } from '../components/Layout';
-import { ContactForm } from '../components/ContactForm';
+import ContactForm from '../components/ContactForm'; // Default import
 import { Mail, MapPin, Phone } from 'lucide-react';
 import { businessConfig } from '../config/business';
 
@@ -27,7 +27,7 @@ export default function Contact() {
               variants={fadeIn}
               className="text-xl text-gray-600 max-w-2xl mx-auto"
             >
-              If you're interested in joining The Hub, renting some space, or have any questions - just submit the form below and we will reach out soon!
+              If you're interested in joining The Hub, renting some space, or have any questions – just submit the form below and we will reach out soon!
             </motion.p>
           </motion.div>
 

@@ -192,10 +192,18 @@ export default function Coworking() {
 
           <SpaceShowcase
             videoTour={{
-              title: 'Virtual Space Tour',
+              title: 'Coworking Space Tour',
               description: 'Take a virtual tour of our coworking space.',
-              embedUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
-              thumbnailUrl: 'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80&w=1200'
+              embedUrl: 'https://www.youtube.com/embed/K3Q_d7puLu8',
+              thumbnailUrl: 'https://i9.ytimg.com/vi_webp/K3Q_d7puLu8/mq2.webp?sqp=CNiy5L8G-oaymwEmCMACELQB8quKqQMa8AEB-AH-CYAC0AWKAgwIABABGGUgVShNMA8=&rs=AOn4CLBnW5fAxSiNS63kKGzcUqnlTHpiFg'
+            }}
+          />
+					<SpaceShowcase
+            videoTour={{
+              title: 'Dedicated Desk Overview',
+              description: 'Check out our dedicated desk options!',
+              embedUrl: 'https://www.youtube.com/embed/IAziNLzEHqk',
+              thumbnailUrl: 'https://i9.ytimg.com/vi_webp/IAziNLzEHqk/mq2.webp?sqp=CKCb5L8G-oaymwEmCMACELQB8quKqQMa8AEB-AH-CYAC0AWKAgwIABABGGUgWihTMA8=&rs=AOn4CLDObY_haX8WcyjIL1MAgoLMU2SkbQ'
             }}
           />
         </div>

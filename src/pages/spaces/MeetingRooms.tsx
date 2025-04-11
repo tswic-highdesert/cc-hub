@@ -161,8 +161,8 @@ export default function MeetingRooms() {
             videoTour={{
               title: 'Meeting Room Tour',
               description: 'Take a virtual tour of our professional meeting spaces.',
-              embedUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
-              thumbnailUrl: 'https://images.unsplash.com/photo-1431540015161-0bf868a2d407?auto=format&fit=crop&q=80&w=1200'
+              embedUrl: 'https://www.youtube.com/embed/3Po7Os3HgDU',
+              thumbnailUrl: 'https://i9.ytimg.com/vi_webp/3Po7Os3HgDU/mq1.webp?sqp=CIS15L8G-oaymwEmCMACELQB8quKqQMa8AEB-AH-CYAC0AWKAgwIABABGGUgUChMMA8=&rs=AOn4CLAtAzvmUWrg9lYp5yAvHqqmzGFG5Q'
             }}
           />
         </div>

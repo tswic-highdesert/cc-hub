@@ -178,8 +178,8 @@ export default function PrivateOffices() {
             videoTour={{
               title: 'Office Tour',
               description: 'Take a virtual tour of our private office spaces.',
-              embedUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
-              thumbnailUrl: 'https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&q=80&w=1200'
+              embedUrl: 'https://www.youtube.com/embed/HcR4w-7fzxo ',
+              thumbnailUrl: 'https://i9.ytimg.com/vi_webp/HcR4w-7fzxo/mq3.webp?sqp=CIS15L8G-oaymwEmCMACELQB8quKqQMa8AEB-AH-CYAC0AWKAgwIABABGGUgZShlMA8=&rs=AOn4CLBuPyeNVp4wvUtVPUcqHLo4eLvTqw'
             }}
           />
         </div>

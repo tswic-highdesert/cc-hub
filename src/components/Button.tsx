@@ -1,6 +1,7 @@
 import React from 'react';
 import { clsx } from 'clsx';
 import { components, animations } from '../styles/theme';
+import { logEvent } from '../lib/analytics';
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: 'primary' | 'outline' | 'white';
@@ -13,8 +14,14 @@ export const Button: React.FC<ButtonProps> = ({
   size = 'md',
   className,
   children,
+  onClick,
   ...props
 }) => {
+  const handleClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    logEvent('Button', 'Click', children?.toString());
+    if (onClick) onClick(e);
+  };
+
   return (
     <button
       className={clsx(
@@ -30,6 +37,7 @@ export const Button: React.FC<ButtonProps> = ({
         },
         className
       )}
+      onClick={handleClick}
       {...props}
     >
       {children}

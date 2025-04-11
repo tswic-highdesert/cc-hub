@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom'; // Import useNavigate
 import { ArrowRight, ChevronDown, Menu, X } from 'lucide-react';
 import { Button } from './Button';
 import { components, typography, effects, animations } from '../styles/theme';
@@ -26,6 +26,7 @@ const navigation: NavItem[] = [
     label: 'Community',
     children: [
       { label: 'Members', href: '/members' },
+      // Keep external links as <a> or handle differently if needed
       { label: 'Events', href: 'https://archieapp.co/co-create-1/public/events' },
       { label: 'Blog', href: '/blog' },
       { label: 'Community Partners', href: '/partners' },
@@ -35,6 +36,7 @@ const navigation: NavItem[] = [
     label: 'Resources',
     children: [
       { label: 'Book a Tour', href: '/tour' },
+      // Keep external links as <a> or handle differently if needed
       { label: 'Member Portal', href: 'https://archieapp.co/co-create-1' },
     ],
   },
@@ -49,6 +51,18 @@ const navigation: NavItem[] = [
 
 const DesktopDropdown: React.FC<{ item: NavItem }> = ({ item }) => {
   const [isOpen, setIsOpen] = React.useState(false);
+  const navigate = useNavigate(); // Use navigate hook
+
+  const handleNavigation = (href?: string) => {
+    if (href) {
+      // Check if it's an external link
+      if (href.startsWith('http://') || href.startsWith('https://')) {
+        window.open(href, '_blank', 'noopener,noreferrer'); // Open external links in new tab
+      } else {
+        navigate(href); // Use navigate for internal links
+      }
+    }
+  };
 
   return (
     <div
@@ -58,21 +72,21 @@ const DesktopDropdown: React.FC<{ item: NavItem }> = ({ item }) => {
     >
       <button
         className={`flex items-center gap-1 text-gray-600 hover:text-primary ${animations.colors} py-2`}
-        onClick={() => setIsOpen(!isOpen)}
+        onClick={() => item.href ? handleNavigation(item.href) : setIsOpen(!isOpen)} // Handle direct link or dropdown toggle
       >
         {item.label}
-        <ChevronDown className={`w-4 h-4 transition-transform ${isOpen ? 'rotate-180' : ''}`} />
+        {item.children && <ChevronDown className={`w-4 h-4 transition-transform ${isOpen ? 'rotate-180' : ''}`} />}
       </button>
-      {isOpen && (
+      {isOpen && item.children && (
         <div className={`absolute top-full left-0 w-56 ${components.card.base} ${effects.shadow.lg} py-2 z-50`}>
-          {item.children?.map((child) => (
-            <Link
-              key={child.href}
-              to={child.href || '#'}
-              className={`block px-4 py-2 text-gray-600 hover:text-primary hover:bg-gray-50 ${animations.colors}`}
+          {item.children.map((child) => (
+            <button
+              key={child.href || child.label}
+              onClick={() => handleNavigation(child.href)}
+              className={`block w-full text-left px-4 py-2 text-gray-600 hover:text-primary hover:bg-gray-50 ${animations.colors}`}
             >
               {child.label}
-            </Link>
+            </button>
           ))}
         </div>
       )}
@@ -80,34 +94,48 @@ const DesktopDropdown: React.FC<{ item: NavItem }> = ({ item }) => {
   );
 };
 
+
 const MobileDropdown: React.FC<{ item: NavItem }> = ({ item }) => {
   const [isOpen, setIsOpen] = React.useState(false);
+  const navigate = useNavigate(); // Use navigate hook
+
+  const handleNavigation = (href?: string) => {
+    if (href) {
+      // Check if it's an external link
+      if (href.startsWith('http://') || href.startsWith('https://')) {
+        window.open(href, '_blank', 'noopener,noreferrer'); // Open external links in new tab
+      } else {
+        navigate(href); // Use navigate for internal links
+      }
+    }
+  };
 
   return (
     <div className="border-b border-gray-100 last:border-none">
       <button
         className={`flex items-center justify-between w-full py-3 text-gray-600 ${animations.colors}`}
-        onClick={() => setIsOpen(!isOpen)}
+        onClick={() => item.href ? handleNavigation(item.href) : setIsOpen(!isOpen)} // Handle direct link or dropdown toggle
       >
         {item.label}
-        <ChevronDown className={`w-4 h-4 transition-transform ${isOpen ? 'rotate-180' : ''}`} />
+        {item.children && <ChevronDown className={`w-4 h-4 transition-transform ${isOpen ? 'rotate-180' : ''}`} />}
       </button>
-      {isOpen && (
+      {isOpen && item.children && (
         <div className="pb-3 pl-4">
-          {item.children?.map((child) => (
-            <Link
-              key={child.href}
-              to={child.href || '#'}
-              className={`block py-2 text-gray-600 hover:text-primary ${animations.colors}`}
+          {item.children.map((child) => (
+            <button
+              key={child.href || child.label}
+              onClick={() => handleNavigation(child.href)}
+              className={`block w-full text-left py-2 text-gray-600 hover:text-primary ${animations.colors}`}
             >
               {child.label}
-            </Link>
+            </button>
           ))}
         </div>
       )}
     </div>
   );
 };
+
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -115,10 +143,43 @@ interface LayoutProps {
 
 export const Layout: React.FC<LayoutProps> = ({ children }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
+  const navigate = useNavigate(); // Use navigate hook
 
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!mobileMenuOpen);
   };
+
+  const handleBookTourClick = () => {
+    navigate('/tour'); // Use navigate for the tour button
+    if (mobileMenuOpen) {
+      setMobileMenuOpen(false); // Close mobile menu on navigation
+    }
+  };
+
+  const handleSignInClick = () => {
+    // Assuming Sign In goes to an external portal
+    window.open('https://archieapp.co/co-create-1', '_blank', 'noopener,noreferrer');
+    if (mobileMenuOpen) {
+      setMobileMenuOpen(false); // Close mobile menu
+    }
+  };
+
+  const handlePricingClick = () => {
+    navigate('/#pricing'); // Navigate to home page pricing section
+    if (mobileMenuOpen) {
+      setMobileMenuOpen(false); // Close mobile menu
+    }
+  };
+
+  // Function to handle navigation for footer links
+  const handleFooterLinkClick = (href: string) => {
+    if (href.startsWith('http://') || href.startsWith('https://')) {
+      window.open(href, '_blank', 'noopener,noreferrer');
+    } else {
+      navigate(href);
+    }
+  };
+
 
   return (
     <div className="min-h-screen bg-white">
@@ -134,9 +195,20 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
           </Link>
           <div className="hidden lg:flex items-center gap-8">
             {navigation.map((item) => (
-              <DesktopDropdown key={item.label} item={item} />
+              item.children ? (
+                <DesktopDropdown key={item.label} item={item} />
+              ) : (
+                <button
+                  key={item.label}
+                  onClick={() => handleFooterLinkClick(item.href!)} // Use handleFooterLinkClick for direct nav items
+                  className={`text-gray-600 hover:text-primary ${animations.colors} py-2`}
+                >
+                  {item.label}
+                </button>
+              )
             ))}
-            <Button onClick={() => window.location.href = '/tour'}>Book Tour</Button>
+            {/* Updated Book Tour Button */}
+            <Button onClick={handleBookTourClick}>Book Tour</Button>
           </div>
           <button
             className={`lg:hidden p-2 text-gray-600 hover:text-primary ${animations.colors}`}
@@ -150,21 +222,37 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
         {/* Mobile Menu */}
         <div
           className={`
-            fixed top-[72px] left-0 right-0 bg-white shadow-lg lg:hidden
-            ${animations.hover}
-            ${mobileMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible'}
+            fixed top-[88px] left-0 right-0 bg-white shadow-lg lg:hidden
+            transition-all duration-300 ease-in-out
+            ${mobileMenuOpen ? 'opacity-100 visible max-h-screen' : 'opacity-0 invisible max-h-0 overflow-hidden'}
           `}
         >
           <div className={`${components.container} py-6 flex flex-col gap-4`}>
             {navigation.map((item) => (
-              <MobileDropdown key={item.label} item={item} />
+               item.children ? (
+                <MobileDropdown key={item.label} item={item} />
+              ) : (
+                <button
+                  key={item.label}
+                  onClick={() => {
+                    handleFooterLinkClick(item.href!);
+                    setMobileMenuOpen(false); // Close menu on click
+                  }}
+                  className={`block w-full text-left py-3 text-gray-600 hover:text-primary ${animations.colors} border-b border-gray-100`}
+                >
+                  {item.label}
+                </button>
+              )
             ))}
-            <a href="/#pricing" className={`block py-3 text-gray-600 hover:text-primary ${animations.colors} border-b border-gray-100`}>
+            {/* Updated Pricing Link */}
+            <button onClick={handlePricingClick} className={`block py-3 text-gray-600 hover:text-primary ${animations.colors} border-b border-gray-100 text-left w-full`}>
               Pricing
-            </a>
+            </button>
             <div className="flex flex-col gap-3 pt-4 border-t border-gray-100">
-              <Button variant="outline" className="w-full">Sign In</Button>
-              <Button className="w-full" onClick={() => window.location.href = '/tour'}>Book Tour</Button>
+              {/* Updated Sign In Button */}
+              <Button variant="outline" className="w-full" onClick={handleSignInClick}>Sign In</Button>
+              {/* Updated Book Tour Button */}
+              <Button className="w-full" onClick={handleBookTourClick}>Book Tour</Button>
             </div>
           </div>
         </div>
@@ -205,28 +293,30 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
             <div>
               <h3 className="text-white font-semibold mb-4">Spaces</h3>
               <ul className="space-y-2">
-                <li><Link to="/coworking" className={`hover:text-white ${animations.colors}`}>Coworking</Link></li>
-                <li><Link to="/private-offices" className={`hover:text-white ${animations.colors}`}>Private Offices</Link></li>
-                <li><Link to="/event-spaces" className={`hover:text-white ${animations.colors}`}>Event Spaces</Link></li>
-                <li><Link to="/meeting-rooms" className={`hover:text-white ${animations.colors}`}>Meeting Rooms</Link></li>
+                 {/* Use button + onClick for internal links */}
+                <li><button onClick={() => handleFooterLinkClick('/coworking')} className={`hover:text-white ${animations.colors} text-left`}>Coworking</button></li>
+                <li><button onClick={() => handleFooterLinkClick('/private-offices')} className={`hover:text-white ${animations.colors} text-left`}>Private Offices</button></li>
+                <li><button onClick={() => handleFooterLinkClick('/event-spaces')} className={`hover:text-white ${animations.colors} text-left`}>Event Spaces</button></li>
+                <li><button onClick={() => handleFooterLinkClick('/meeting-rooms')} className={`hover:text-white ${animations.colors} text-left`}>Meeting Rooms</button></li>
               </ul>
             </div>
             <div>
               <h3 className="text-white font-semibold mb-4">Company</h3>
               <ul className="space-y-2">
-                <li><Link to="/blog" className={`hover:text-white ${animations.colors}`}>Blog</Link></li>
-                <li><Link to="/gallery" className={`hover:text-white ${animations.colors}`}>Gallery</Link></li>
-                <li><a href="https://archieapp.co/co-create-1/public/events" className={`hover:text-white ${animations.colors}`}>Events</a></li>
-                <li><Link to="/members" className={`hover:text-white ${animations.colors}`}>Members</Link></li>
-                <li><Link to="/contact" className={`hover:text-white ${animations.colors}`}>Contact</Link></li>
-                <li><Link to="/tour" className={`hover:text-white ${animations.colors}`}>Book a Tour</Link></li>
+                <li><button onClick={() => handleFooterLinkClick('/blog')} className={`hover:text-white ${animations.colors} text-left`}>Blog</button></li>
+                <li><button onClick={() => handleFooterLinkClick('/gallery')} className={`hover:text-white ${animations.colors} text-left`}>Gallery</button></li>
+                {/* Keep external link as <a> */}
+                <li><a href="https://archieapp.co/co-create-1/public/events" target="_blank" rel="noopener noreferrer" className={`hover:text-white ${animations.colors}`}>Events</a></li>
+                <li><button onClick={() => handleFooterLinkClick('/members')} className={`hover:text-white ${animations.colors} text-left`}>Members</button></li>
+                <li><button onClick={() => handleFooterLinkClick('/contact')} className={`hover:text-white ${animations.colors} text-left`}>Contact</button></li>
+                <li><button onClick={() => handleFooterLinkClick('/tour')} className={`hover:text-white ${animations.colors} text-left`}>Book a Tour</button></li>
               </ul>
             </div>
             <div>
               <h3 className="text-white font-semibold mb-4">Legal</h3>
               <ul className="space-y-2">
-                <li><Link to="/privacy" className={`hover:text-white ${animations.colors}`}>Privacy</Link></li>
-                <li><Link to="/terms" className={`hover:text-white ${animations.colors}`}>Terms</Link></li>
+                <li><button onClick={() => handleFooterLinkClick('/privacy')} className={`hover:text-white ${animations.colors} text-left`}>Privacy</button></li>
+                <li><button onClick={() => handleFooterLinkClick('/terms')} className={`hover:text-white ${animations.colors} text-left`}>Terms</button></li>
               </ul>
             </div>
           </div>

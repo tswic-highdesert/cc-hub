@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { fadeIn, staggerContainer } from '../animations';
 import { Building2, Users, Calendar, Brain, Handshake, Mic2 } from 'lucide-react';
 import { Button } from './Button';
 import { SelectableFeatureCard } from './SelectableFeatureCard';
-import { components, typography, animations, spacing } from '../styles/theme';
+import { components, typography } from '../styles/theme';
+import { logEvent } from '../lib/analytics';
 
 interface FormData {
   name: string;
@@ -18,56 +19,68 @@ const services = [
     icon: Building2,
     title: 'Private Offices',
     description: 'Secure, private workspace solutions for teams of all sizes.',
-    value: 'private-offices'
+    value: 'private-offices',
   },
   {
     icon: Users,
     title: 'Coworking Space',
     description: 'Flexible workspace in our collaborative environment.',
-    value: 'coworking-space'
+    value: 'coworking-space',
   },
   {
     icon: Calendar,
     title: 'Meeting Rooms',
     description: 'Professional spaces for meetings and presentations.',
-    value: 'meeting-rooms'
+    value: 'meeting-rooms',
   },
   {
     icon: Brain,
     title: 'Think Lounge',
     description: 'Versatile event space for workshops and gatherings.',
-    value: 'think-lounge'
+    value: 'think-lounge',
   },
   {
     icon: Handshake,
     title: 'Partnership',
     description: 'Explore partnership opportunities with our innovation hub.',
-    value: 'partnership'
+    value: 'partnership',
   },
   {
     icon: Mic2,
     title: 'Podcast Production',
     description: 'Professional podcast recording and production services.',
-    value: 'podcast-production'
-  }
+    value: 'podcast-production',
+  },
 ];
 
-export const ContactForm: React.FC = () => {
-  const [isSubmitting, setIsSubmitting] = React.useState(false);
-  const [successMessage, setSuccessMessage] = React.useState<string | null>(null);
-  const [errorMessage, setErrorMessage] = React.useState<string | null>(null);
-  const [formData, setFormData] = React.useState<FormData>({
+const ContactForm: React.FC = () => {
+  const [formData, setFormData] = useState<FormData>({
     name: '',
     email: '',
     phone: '',
-    interests: []
+    interests: [],
   });
+
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [successMessage, setSuccessMessage] = useState<string | null>(null);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+
+  const handleInterestChange = (interest: string) => {
+    setFormData(prev => ({
+      ...prev,
+      interests: prev.interests.includes(interest)
+        ? prev.interests.filter(i => i !== interest)
+        : [...prev.interests, interest],
+    }));
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
     setErrorMessage(null);
     setSuccessMessage(null);
+
+    logEvent('Form', 'Submit', 'Contact Form');
 
     try {
       const response = await fetch('https://services.leadconnectorhq.com/hooks/Cxq3wlhbzAsZ3mqstz89/webhook-trigger/8361e585-dd47-4075-aa75-3339d20fde5b', {
@@ -78,17 +91,14 @@ export const ContactForm: React.FC = () => {
         body: JSON.stringify(formData),
       });
 
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
+      if (!response.ok) throw new Error('Network response was not ok');
 
-      // Show success message and reset form
       setSuccessMessage('Thank you for your submission! We will be in touch soon.');
       setFormData({
         name: '',
         email: '',
         phone: '',
-        interests: []
+        interests: [],
       });
     } catch (error) {
       console.error('Error submitting form:', error);
@@ -96,15 +106,6 @@ export const ContactForm: React.FC = () => {
     } finally {
       setIsSubmitting(false);
     }
-  };
-
-  const handleInterestChange = (interest: string) => {
-    setFormData(prev => ({
-      ...prev,
-      interests: prev.interests.includes(interest)
-        ? prev.interests.filter(i => i !== interest)
-        : [...prev.interests, interest]
-    }));
   };
 
   return (
@@ -116,7 +117,7 @@ export const ContactForm: React.FC = () => {
       className="space-y-6"
     >
       {successMessage && (
-        <motion.div 
+        <motion.div
           variants={fadeIn}
           className="bg-green-50 border border-green-200 text-green-800 rounded-md p-4 mb-6"
         >
@@ -125,7 +126,7 @@ export const ContactForm: React.FC = () => {
       )}
 
       {errorMessage && (
-        <motion.div 
+        <motion.div
           variants={fadeIn}
           className="bg-red-50 border border-red-200 text-red-800 rounded-md p-4 mb-6"
         >
@@ -203,3 +204,5 @@ export const ContactForm: React.FC = () => {
     </motion.form>
   );
 };
+
+export default ContactForm;

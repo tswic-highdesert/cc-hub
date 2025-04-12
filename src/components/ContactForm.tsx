@@ -15,42 +15,12 @@ interface FormData {
 }
 
 const services = [
-  {
-    icon: Building2,
-    title: 'Private Offices',
-    description: 'Secure, private workspace solutions for teams of all sizes.',
-    value: 'private-offices',
-  },
-  {
-    icon: Users,
-    title: 'Coworking Space',
-    description: 'Flexible workspace in our collaborative environment.',
-    value: 'coworking-space',
-  },
-  {
-    icon: Calendar,
-    title: 'Meeting Rooms',
-    description: 'Professional spaces for meetings and presentations.',
-    value: 'meeting-rooms',
-  },
-  {
-    icon: Brain,
-    title: 'Think Lounge',
-    description: 'Versatile event space for workshops and gatherings.',
-    value: 'think-lounge',
-  },
-  {
-    icon: Handshake,
-    title: 'Partnership',
-    description: 'Explore partnership opportunities with our innovation hub.',
-    value: 'partnership',
-  },
-  {
-    icon: Mic2,
-    title: 'Podcast Production',
-    description: 'Professional podcast recording and production services.',
-    value: 'podcast-production',
-  },
+  { icon: Building2, title: 'Private Offices', description: 'Secure, private workspace solutions for teams of all sizes.', value: 'private-offices' },
+  { icon: Users, title: 'Coworking Space', description: 'Flexible workspace in our collaborative environment.', value: 'coworking-space' },
+  { icon: Calendar, title: 'Meeting Rooms', description: 'Professional spaces for meetings and presentations.', value: 'meeting-rooms' },
+  { icon: Brain, title: 'Think Lounge', description: 'Versatile event space for workshops and gatherings.', value: 'think-lounge' },
+  { icon: Handshake, title: 'Partnership', description: 'Explore partnership opportunities with our innovation hub.', value: 'partnership' },
+  { icon: Mic2, title: 'Podcast Production', description: 'Professional podcast recording and production services.', value: 'podcast-production' },
 ];
 
 const ContactForm: React.FC = () => {
@@ -74,7 +44,7 @@ const ContactForm: React.FC = () => {
     }));
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
     setErrorMessage(null);
@@ -82,26 +52,30 @@ const ContactForm: React.FC = () => {
 
     logEvent('Form', 'Submit', 'Contact Form');
 
+    const fallbackFormData = new FormData(e.currentTarget);
+
     try {
+      // Send to LeadConnector (primary)
       const response = await fetch('https://services.leadconnectorhq.com/hooks/Cxq3wlhbzAsZ3mqstz89/webhook-trigger/8361e585-dd47-4075-aa75-3339d20fde5b', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),
       });
 
-      if (!response.ok) throw new Error('Network response was not ok');
+      if (!response.ok) throw new Error('Primary webhook failed');
 
       setSuccessMessage('Thank you for your submission! We will be in touch soon.');
-      setFormData({
-        name: '',
-        email: '',
-        phone: '',
-        interests: [],
+
+      // Optional: Submit to Netlify (fallback)
+      await fetch('/', {
+        method: 'POST',
+        body: fallbackFormData,
       });
+
+      // Reset form
+      setFormData({ name: '', email: '', phone: '', interests: [] });
     } catch (error) {
-      console.error('Error submitting form:', error);
+      console.error('Submission error:', error);
       setErrorMessage('There was a problem submitting your request. Please try again later.');
     } finally {
       setIsSubmitting(false);
@@ -110,12 +84,21 @@ const ContactForm: React.FC = () => {
 
   return (
     <motion.form
+      name="Contact Form"
+      method="POST"
+      data-netlify="true"
+      netlify-honeypot="bot-field"
       variants={staggerContainer}
       initial="hidden"
       animate="show"
       onSubmit={handleSubmit}
       className="space-y-6"
     >
+      {/* Netlify required fields */}
+      <input type="hidden" name="form-name" value="Contact Form" />
+      <input type="hidden" name="bot-field" />
+      <input type="hidden" name="interests" value={formData.interests.join(', ')} />
+
       {successMessage && (
         <motion.div
           variants={fadeIn}
@@ -141,6 +124,7 @@ const ContactForm: React.FC = () => {
         <input
           type="text"
           id="name"
+          name="name"
           required
           value={formData.name}
           onChange={(e) => setFormData(prev => ({ ...prev, name: e.target.value }))}
@@ -155,6 +139,7 @@ const ContactForm: React.FC = () => {
         <input
           type="email"
           id="email"
+          name="email"
           required
           value={formData.email}
           onChange={(e) => setFormData(prev => ({ ...prev, email: e.target.value }))}
@@ -169,6 +154,7 @@ const ContactForm: React.FC = () => {
         <input
           type="tel"
           id="phone"
+          name="phone"
           required
           value={formData.phone}
           onChange={(e) => setFormData(prev => ({ ...prev, phone: e.target.value }))}

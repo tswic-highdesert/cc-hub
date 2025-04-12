@@ -194,12 +194,3 @@ createRoot(document.getElementById('root')!).render(
 
 // Initialize Google Analytics
 initGA();
-
-//Hidden Dummy Form for Netlify
-<form name="Contact Form" netlify netlify-honeypot="bot-field" hidden>
-  <input type="text" name="name" />
-  <input type="email" name="email" />
-  <input type="tel" name="phone" />
-  <input type="text" name="interests" />
-  <input type="text" name="bot-field" />
-</form>

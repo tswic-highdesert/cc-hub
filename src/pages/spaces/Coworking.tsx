@@ -195,7 +195,6 @@ export default function Coworking() {
               title: 'Coworking Space Tour',
               description: 'Take a virtual tour of our coworking space.',
               embedUrl: 'https://www.youtube.com/embed/K3Q_d7puLu8',
-              thumbnailUrl: 'https://i9.ytimg.com/vi_webp/K3Q_d7puLu8/mq2.webp?sqp=CNiy5L8G-oaymwEmCMACELQB8quKqQMa8AEB-AH-CYAC0AWKAgwIABABGGUgVShNMA8=&rs=AOn4CLBnW5fAxSiNS63kKGzcUqnlTHpiFg'
             }}
           />
 					<SpaceShowcase
@@ -203,7 +202,6 @@ export default function Coworking() {
               title: 'Dedicated Desk Overview',
               description: 'Check out our dedicated desk options!',
               embedUrl: 'https://www.youtube.com/embed/IAziNLzEHqk',
-              thumbnailUrl: 'https://i9.ytimg.com/vi_webp/IAziNLzEHqk/mq2.webp?sqp=CKCb5L8G-oaymwEmCMACELQB8quKqQMa8AEB-AH-CYAC0AWKAgwIABABGGUgWihTMA8=&rs=AOn4CLDObY_haX8WcyjIL1MAgoLMU2SkbQ'
             }}
           />
         </div>

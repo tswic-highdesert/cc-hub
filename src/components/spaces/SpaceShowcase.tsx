@@ -15,12 +15,16 @@ interface SpaceShowcaseProps {
     title: string;
     description: string;
     embedUrl: string;
-    thumbnailUrl: string;
   };
 }
 
 export const SpaceShowcase: React.FC<SpaceShowcaseProps> = ({ videoTour }) => {
   const [isPlaying, setIsPlaying] = useState(false);
+
+  const getYouTubeThumbnail = (url: string) => {
+    const videoId = url.split('v=')[1] || url.split('/embed/')[1];
+    return `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
+  };
 
   return (
     <div className={spacing.section.lg}>
@@ -39,18 +43,18 @@ export const SpaceShowcase: React.FC<SpaceShowcaseProps> = ({ videoTour }) => {
             ) : (
               <>
                 <img
-                  src={videoTour.thumbnailUrl}
+                  src={getYouTubeThumbnail(videoTour.embedUrl)}
                   alt={videoTour.title}
-                  className="w-full h-full object-cover opacity-50"
+                  className="w-full h-full object-cover cursor-pointer"
+                  onClick={() => setIsPlaying(true)}
                 />
                 <button
                   onClick={() => setIsPlaying(true)}
-                  className="absolute inset-0 flex flex-col items-center justify-center bg-black/30 hover:bg-black/40 transition-colors"
+                  className="absolute inset-0 flex items-center justify-center bg-black/30 hover:bg-black/40 transition-colors"
                 >
-                  <div className="w-16 h-16 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center mb-4">
+                  <div className="w-16 h-16 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center">
                     <Play className="w-8 h-8 text-white ml-1" />
                   </div>
-                  <p className="text-white text-xl font-medium">Watch Video Tour</p>
                 </button>
               </>
             )}

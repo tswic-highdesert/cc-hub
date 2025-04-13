@@ -27,7 +27,7 @@ const navigation: NavItem[] = [
     children: [
       { label: 'Members', href: '/members' },
       // Keep external links as <a> or handle differently if needed
-      { label: 'Events', href: 'https://archieapp.co/co-create-1/public/events' },
+      { label: 'Events', href: '/events' }, // Updated link to internal events page
       { label: 'Blog', href: '/blog' },
       { label: 'Community Partners', href: '/partners' },
     ],
@@ -306,7 +306,7 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
                 <li><button onClick={() => handleFooterLinkClick('/blog')} className={`hover:text-white ${animations.colors} text-left`}>Blog</button></li>
                 <li><button onClick={() => handleFooterLinkClick('/gallery')} className={`hover:text-white ${animations.colors} text-left`}>Gallery</button></li>
                 {/* Keep external link as <a> */}
-                <li><a href="https://archieapp.co/co-create-1/public/events" target="_blank" rel="noopener noreferrer" className={`hover:text-white ${animations.colors}`}>Events</a></li>
+                <li><a href="/events" className={`hover:text-white ${animations.colors}`}>Events</a></li> {/* Updated link to internal events page */}
                 <li><button onClick={() => handleFooterLinkClick('/members')} className={`hover:text-white ${animations.colors} text-left`}>Members</button></li>
                 <li><button onClick={() => handleFooterLinkClick('/contact')} className={`hover:text-white ${animations.colors} text-left`}>Contact</button></li>
                 <li><button onClick={() => handleFooterLinkClick('/tour')} className={`hover:text-white ${animations.colors} text-left`}>Book a Tour</button></li>

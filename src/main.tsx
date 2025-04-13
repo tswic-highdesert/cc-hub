@@ -18,6 +18,8 @@ import Press from './pages/Press.tsx';
 import Privacy from './pages/Privacy.tsx';
 import Terms from './pages/Terms.tsx';
 import Podcasts from './pages/spaces/Podcasts.tsx';
+import Events from './pages/Events.tsx'; // Import Events page
+import ErrorBoundary from './components/ErrorBoundary'; // Import ErrorBoundary
 import './index.css';
 import { initGA, logPageView } from './lib/analytics';
 
@@ -37,6 +39,7 @@ const router = createBrowserRouter([
   {
     path: '/',
     element: <App />,
+    errorElement: <ErrorBoundary />, // Add ErrorBoundary
     children: [
       {
         path: '',
@@ -179,6 +182,15 @@ const router = createBrowserRouter([
           <>
             <ScrollToTop />
             <Podcasts />
+          </>
+        ),
+      },
+      {
+        path: 'events', // Add Events route
+        element: (
+          <>
+            <ScrollToTop />
+            <Events />
           </>
         ),
       },

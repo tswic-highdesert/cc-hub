@@ -24,7 +24,7 @@ import { Layout } from '../components/Layout';
 import { useSuccessStories } from '../hooks/useSuccessStories';
 import { useBlogPosts } from '../hooks/useBlog';
 import { UseCase } from '../components/spaces/UseCase';
-
+import ArchieEvents from '../components/ArchieEvents';
 
 const features = [
   {
@@ -327,6 +327,13 @@ export default function Home() {
           </motion.div>
 
           <BlogPreviewSection />
+        </div>
+      </section>
+
+      {/* Events Section */}
+      <section className="py-20 bg-gray-50">
+        <div className="container mx-auto px-4">
+          <ArchieEvents />
         </div>
       </section>
 

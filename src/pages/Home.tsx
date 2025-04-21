@@ -154,6 +154,13 @@ export default function Home() {
             />
           </motion.div>
 
+      {/* Events Section */}
+      <section className="py-20 bg-gray-50">
+        <div className="container mx-auto px-4">
+          <ArchieEvents />
+        </div>
+      </section>
+					
           {/* Features */}
           <motion.div
             variants={staggerContainer}
@@ -327,13 +334,6 @@ export default function Home() {
           </motion.div>
 
           <BlogPreviewSection />
-        </div>
-      </section>
-
-      {/* Events Section */}
-      <section className="py-20 bg-gray-50">
-        <div className="container mx-auto px-4">
-          <ArchieEvents />
         </div>
       </section>
 

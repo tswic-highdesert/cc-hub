@@ -1,4 +1,5 @@
 import React from 'react';
+import { Helmet } from 'react-helmet-async';
 import { useNavigate } from 'react-router-dom'; // Import useNavigate
 import { motion } from 'framer-motion';
 import {
@@ -114,7 +115,39 @@ export default function PrivateOffices() {
   const { stories, loading: storiesLoading } = useSuccessStories('private-offices');
   const navigate = useNavigate(); // Initialize useNavigate
   return (
-    <Layout>
+    <>
+      <Helmet>
+        <title>Private Offices | Co-Create Innovation Hub</title>
+        <meta name="description" content="Secure, fully-furnished private offices for teams in Russellville, AR. Flexible terms, 24/7 access, and premium amenities." />
+        <link rel="canonical" href="https://cc-hub.com/spaces/private-offices" />
+        <meta property="og:title" content="Private Offices | Co-Create Innovation Hub" />
+        <meta property="og:description" content="Secure, fully-furnished private offices for teams in Russellville, AR. Flexible terms, 24/7 access, and premium amenities." />
+        <meta property="og:image" content="https://images.ctfassets.net/472n3jj0rqks/5DVTh80kNoaqqQtwbyBHCY/3f35fc4e6e8cf22e4d139a08eef2966c/CoCreateInnovHub_Logo.png" />
+        <meta property="og:url" content="https://cc-hub.com/spaces/private-offices" />
+        <meta property="og:type" content="website" />
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "LocalBusiness",
+            "name": "Co-Create Innovation Hub",
+            "image": "https://images.ctfassets.net/472n3jj0rqks/5DVTh80kNoaqqQtwbyBHCY/3f35fc4e6e8cf22e4d139a08eef2966c/CoCreateInnovHub_Logo.png",
+            "priceRange": "$650-$950/month",
+            "address": {
+              "@type": "PostalAddress",
+              "streetAddress": "215 S Arkansas Ave",
+              "addressLocality": "Russellville",
+              "addressRegion": "AR",
+              "postalCode": "72801",
+              "addressCountry": "US"
+            },
+            "url": "https://cc-hub.com/spaces/private-offices",
+            "telephone": "479-310-5370",
+            "openingHours": "Mo-Fr 08:00-17:00",
+            "description": "Secure, fully-furnished private offices for teams. Flexible terms, 24/7 access, premium amenities."
+          })}
+        </script>
+      </Helmet>
+      <Layout>
       <PageHero
         slug="private-offices"
         title="Private Offices"
@@ -395,6 +428,7 @@ export default function PrivateOffices() {
           </motion.div>
         </motion.div>
       </section>
-    </Layout>
+      </Layout>
+    </>
   );
 }

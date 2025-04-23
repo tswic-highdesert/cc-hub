@@ -1,4 +1,5 @@
 import React from 'react';
+import { Helmet } from 'react-helmet-async';
 import { useNavigate } from 'react-router-dom'; // Import useNavigate
 import { motion } from 'framer-motion';
 import {
@@ -97,7 +98,40 @@ export default function MeetingRooms() {
   const navigate = useNavigate(); // Initialize useNavigate
 
   return (
-    <Layout>
+    <>
+      <Helmet>
+        <title>Meeting Rooms | Co-Create Innovation Hub</title>
+        <meta name="description" content="Professional meeting spaces with modern AV, fast internet, and flexible layouts in Russellville, AR." />
+        <link rel="canonical" href="https://cc-hub.com/spaces/meeting-rooms" />
+        <meta property="og:title" content="Meeting Rooms | Co-Create Innovation Hub" />
+        <meta property="og:description" content="Professional meeting spaces with modern AV, fast internet, and flexible layouts in Russellville, AR." />
+        <meta property="og:image" content="https://images.ctfassets.net/472n3jj0rqks/5DVTh80kNoaqqQtwbyBHCY/3f35fc4e6e8cf22e4d139a08eef2966c/CoCreateInnovHub_Logo.png" />
+        <meta property="og:url" content="https://cc-hub.com/spaces/meeting-rooms" />
+        <meta property="og:type" content="website" />
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "LocalBusiness",
+            "name": "Co-Create Innovation Hub",
+            "image": "https://images.ctfassets.net/472n3jj0rqks/5DVTh80kNoaqqQtwbyBHCY/3f35fc4e6e8cf22e4d139a08eef2966c/CoCreateInnovHub_Logo.png",
+            "priceRange": "$50/hour",
+            "address": {
+              "@type": "PostalAddress",
+              "streetAddress": "215 S Arkansas Ave",
+              "addressLocality": "Russellville",
+              "addressRegion": "AR",
+              "postalCode": "72801",
+              "addressCountry": "US"
+            },
+            "url": "https://cc-hub.com/spaces/meeting-rooms",
+            "telephone": "479-310-5370",
+            "openingHours": "Mo-Fr 08:00-17:00",
+            "description": "Professional meeting spaces with modern AV, fast internet, and flexible layouts for successful collaboration."
+          })}
+        </script>
+      </Helmet>
+
+      <Layout>
       <PageHero
         slug="meeting-rooms"
         title="Meeting Rooms"
@@ -386,6 +420,7 @@ export default function MeetingRooms() {
           </motion.div>
         </motion.div>
       </section>
-    </Layout>
+      </Layout>
+    </>
   );
 }

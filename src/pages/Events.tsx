@@ -72,6 +72,8 @@ const Events: React.FC = () => {
     "@graph": upcomingEvents.map(event => ({
       "@type": "Event",
       "name": event.title,
+      "description": event.description,
+      "image": event.cover || "https://images.ctfassets.net/472n3jj0rqks/5DVTh80kNoaqqQtwbyBHCY/3f35fc4e6e8cf22e4d139a08eef2966c/CoCreateInnovHub_Logo.png",
       "startDate": event.start_date,
       "endDate": event.end_date,
       "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
@@ -86,6 +88,11 @@ const Events: React.FC = () => {
           "addressRegion": "AR",
           "postalCode": "72801"
         }
+      },
+      "organizer": {
+        "@type": "Organization",
+        "name": "Co-Create Innovation Hub",
+        "url": "https://cc-hub.com"
       },
       "offers": {
         "@type": "Offer",

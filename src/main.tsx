@@ -17,7 +17,6 @@ import Gallery from './pages/Gallery.tsx';
 import Press from './pages/Press.tsx';
 import Privacy from './pages/Privacy.tsx';
 import Terms from './pages/Terms.tsx';
-import Podcasts from './pages/spaces/Podcasts.tsx';
 import Events from './pages/Events.tsx'; // Import Events page
 import ErrorBoundary from './components/ErrorBoundary'; // Import ErrorBoundary
 import './index.css';
@@ -173,15 +172,6 @@ const router = createBrowserRouter([
           <>
             <ScrollToTop />
             <Terms />
-          </>
-        ),
-      },
-      {
-        path: 'podcasts',
-        element: (
-          <>
-            <ScrollToTop />
-            <Podcasts />
           </>
         ),
       },

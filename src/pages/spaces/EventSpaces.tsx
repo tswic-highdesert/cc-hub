@@ -1,4 +1,5 @@
 import React from 'react';
+import { Helmet } from 'react-helmet-async';
 import { useNavigate } from 'react-router-dom'; // Import useNavigate
 import { motion } from 'framer-motion';
 import {
@@ -115,7 +116,39 @@ export default function EventSpaces() {
 
 
   return (
-    <Layout>
+    <>
+      <Helmet>
+        <title>Event Spaces | Co-Create Innovation Hub</title>
+        <meta name="description" content="Host workshops, presentations, and gatherings in our fully equipped event spaces in Russellville, AR." />
+        <link rel="canonical" href="https://cc-hub.com/spaces/event-spaces" />
+        <meta property="og:title" content="Event Spaces | Co-Create Innovation Hub" />
+        <meta property="og:description" content="Host workshops, presentations, and gatherings in our fully equipped event spaces in Russellville, AR." />
+        <meta property="og:image" content="https://images.ctfassets.net/472n3jj0rqks/5DVTh80kNoaqqQtwbyBHCY/3f35fc4e6e8cf22e4d139a08eef2966c/CoCreateInnovHub_Logo.png" />
+        <meta property="og:url" content="https://cc-hub.com/spaces/event-spaces" />
+        <meta property="og:type" content="website" />
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "LocalBusiness",
+            "name": "Co-Create Innovation Hub",
+            "image": "https://images.ctfassets.net/472n3jj0rqks/5DVTh80kNoaqqQtwbyBHCY/3f35fc4e6e8cf22e4d139a08eef2966c/CoCreateInnovHub_Logo.png",
+            "priceRange": "$150-$550",
+            "address": {
+              "@type": "PostalAddress",
+              "streetAddress": "215 S Arkansas Ave",
+              "addressLocality": "Russellville",
+              "addressRegion": "AR",
+              "postalCode": "72801",
+              "addressCountry": "US"
+            },
+            "url": "https://cc-hub.com/spaces/event-spaces",
+            "telephone": "479-310-5370",
+            "openingHours": "Mo-Fr 08:00-17:00",
+            "description": "Versatile event spaces for workshops, presentations, and community gatherings in Russellville, AR."
+          })}
+        </script>
+      </Helmet>
+      <Layout>
       <PageHero
         slug="event-spaces"
         title="Think Lounge"
@@ -437,6 +470,7 @@ export default function EventSpaces() {
           </motion.div>
         </motion.div>
       </section>
-    </Layout>
+      </Layout>
+    </>
   );
 }

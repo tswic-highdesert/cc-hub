@@ -1,5 +1,3 @@
-import dotenv from 'dotenv';
-dotenv.config();
 import { SitemapStream, streamToPromise } from 'sitemap';
 import { createWriteStream } from 'fs';
 import fetch from 'node-fetch'; // to pull dynamic content
@@ -34,8 +32,8 @@ async function generateSitemap() {
   });
 
   // Dynamic Blog Posts from Contentful
-  const SPACE_ID = process.env.VITE_CONTENTFUL_SPACE_ID;
-  const ACCESS_TOKEN = process.env.VITE_CONTENTFUL_ACCESS_TOKEN;
+const SPACE_ID = process.env.VITE_CONTENTFUL_SPACE_ID || '';
+const ACCESS_TOKEN = process.env.VITE_CONTENTFUL_ACCESS_TOKEN || '';
   const res = await fetch(`https://cdn.contentful.com/spaces/${SPACE_ID}/environments/master/entries?content_type=blogPost&access_token=${ACCESS_TOKEN}`);
   const data = await res.json();
 

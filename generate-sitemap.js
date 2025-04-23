@@ -1,7 +1,8 @@
-require('dotenv').config();
-const { SitemapStream, streamToPromise } = require('sitemap');
-const { createWriteStream } = require('fs');
-const fetch = require('node-fetch'); // to pull dynamic content
+import dotenv from 'dotenv';
+dotenv.config();
+import { SitemapStream, streamToPromise } from 'sitemap';
+import { createWriteStream } from 'fs';
+import fetch from 'node-fetch'; // to pull dynamic content
 
 const BASE_URL = 'https://cc-hub.com';
 

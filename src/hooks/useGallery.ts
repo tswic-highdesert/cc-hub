@@ -26,7 +26,11 @@ export function useGallery(filters: GalleryFilters = {}, page: number = 1) {
         }
 
         const response = await client.getEntries<GalleryImage>(query);
-        setData(response.items);
+        if (page === 1) {
+          setData(response.items);
+        } else {
+          setData(prevData => [...prevData, ...response.items]);
+        }
         setTotalPages(Math.ceil(response.total / ITEMS_PER_PAGE));
         setError(null);
       } catch (err) {
@@ -38,6 +42,10 @@ export function useGallery(filters: GalleryFilters = {}, page: number = 1) {
 
     fetchGallery();
   }, [filters, page]);
+
+  useEffect(() => {
+    setData([]);
+  }, [filters]);
 
   const processedImages = useMemo<ProcessedGalleryImage[]>(() => {
     return data.map(item => ({

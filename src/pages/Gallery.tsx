@@ -6,6 +6,7 @@ import { GalleryFilters } from '../components/gallery/GalleryFilters';
 import { useGallery } from '../hooks/useGallery';
 import type { GalleryFilters as GalleryFiltersType } from '../types/gallery';
 import { Button } from '../components/Button';
+import { Helmet } from 'react-helmet-async';
 
 export default function Gallery() {
   const [page, setPage] = React.useState(1);
@@ -48,40 +49,48 @@ export default function Gallery() {
   };
 
   return (
-    <Layout>
-      <PageHero
-        slug="gallery"
-        title="Our Space Gallery"
-        description="Take a visual journey through our modern facilities and historic building."
-        backgroundImage="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80&w=2000"
-      />
+    <>
+      <Helmet>
+        <title>Gallery | Co-Create Innovation Hub</title>
+        <meta name="description" content="Explore photos of our coworking spaces, meeting rooms, and community events at Co-Create Innovation Hub." />
+        <link rel="canonical" href="https://cc-hub.com/gallery" />
+      </Helmet>
 
-      <div className="bg-gradient-to-br from-[#f0f7fc] to-white py-20">
-        <div className="container mx-auto px-4">
-          <GalleryFilters
-            filters={filters}
-            onFiltersChange={handleFiltersChange}
-            className="mb-12"
-          />
-          <GalleryGrid
-            images={images}
-            loading={loading}
-            error={error}
-          />
-          
-          {page < totalPages && (
-            <div className="text-center mt-12">
-              <Button
-                variant="outline"
-                onClick={loadMore}
-                disabled={loading}
-              >
-                {loading ? 'Loading...' : 'Load More'}
-              </Button>
-            </div>
-          )}
+      <Layout>
+        <PageHero
+          slug="gallery"
+          title="Our Space Gallery"
+          description="Take a visual journey through our modern facilities and historic building."
+          backgroundImage="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80&w=2000"
+        />
+
+        <div className="bg-gradient-to-br from-[#f0f7fc] to-white py-20">
+          <div className="container mx-auto px-4">
+            <GalleryFilters
+              filters={filters}
+              onFiltersChange={handleFiltersChange}
+              className="mb-12"
+            />
+            <GalleryGrid
+              images={images}
+              loading={loading}
+              error={error}
+            />
+            
+            {page < totalPages && (
+              <div className="text-center mt-12">
+                <Button
+                  variant="outline"
+                  onClick={loadMore}
+                  disabled={loading}
+                >
+                  {loading ? 'Loading...' : 'Load More'}
+                </Button>
+              </div>
+            )}
+          </div>
         </div>
-      </div>
-    </Layout>
+      </Layout>
+    </>
   );
 }

@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { Helmet } from 'react-helmet-async';
 import { useNavigate } from 'react-router-dom'; // Import useNavigate
 import {
   ArrowRight,
@@ -64,6 +65,12 @@ export default function Home() {
   const navigate = useNavigate(); // Initialize useNavigate
 
   return (
+    <>
+    <Helmet>
+      <title>Co-Create Innovation Hub | Workspaces, Events, and Business Growth</title>
+      <meta name="description" content="A modern coworking and creative space in Russellville, AR. Join our vibrant community of innovators and entrepreneurs." />
+      <link rel="canonical" href="https://cc-hub.com/" />
+    </Helmet>
     <Layout>
       {/* Hero Section */}
       <PageHero
@@ -382,6 +389,7 @@ export default function Home() {
         </motion.div>
       </section>
     </Layout>
+    </>
   );
 }
 

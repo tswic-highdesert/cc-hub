@@ -12,13 +12,14 @@ const client = createClient({
   accessToken: contentfulConfig.accessToken,
 });
 
-export async function getAsset(id: string): Promise<Asset | null> {
+export async function getAsset(id: string, width: number = 800): Promise<Asset | null> {
   try {
     const asset = await client.getAsset(id);
+    let url = `https:${asset.fields.file.url}?w=${width}&auto=compress`;
     return {
       title: asset.fields.title,
       description: asset.fields.description,
-      url: `https:${asset.fields.file.url}`,
+      url,
       width: asset.fields.file.details.image?.width || 0,
       height: asset.fields.file.details.image?.height || 0,
     };
@@ -28,11 +29,12 @@ export async function getAsset(id: string): Promise<Asset | null> {
   }
 }
 
-export function parseContentfulImage(image: ContentfulImage): Asset {
+export function parseContentfulImage(image: ContentfulImage, width: number = 800): Asset {
+  const url = `https:${image.fields.file.url}?w=${width}&auto=compress`;
   return {
     title: image.fields.title,
     description: image.fields.description,
-    url: `https:${image.fields.file.url}`,
+    url,
     width: image.fields.file.details.image.width,
     height: image.fields.file.details.image.height,
   };

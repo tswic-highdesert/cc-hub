@@ -54,6 +54,22 @@ export default function Gallery() {
         <title>Gallery | Co-Create Innovation Hub</title>
         <meta name="description" content="Explore photos of our coworking spaces, meeting rooms, and community events at Co-Create Innovation Hub." />
         <link rel="canonical" href="https://cc-hub.com/gallery" />
+        {/* Open Graph meta tags */}
+        <meta property="og:title" content="Gallery | Co-Create Innovation Hub" />
+        <meta property="og:description" content="Explore photos of our coworking spaces, meeting rooms, and community events at Co-Create Innovation Hub." />
+        <meta property="og:image" content="https://images.ctfassets.net/472n3jj0rqks/5DVTh80kNoaqqQtwbyBHCY/3f35fc4e6e8cf22e4d139a08eef2966c/CoCreateInnovHub_Logo.png" />
+        <meta property="og:url" content="https://cc-hub.com/gallery" />
+        <meta property="og:type" content="website" />
+        {/* CollectionPage JSON-LD schema */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "CollectionPage",
+            "name": "Gallery | Co-Create Innovation Hub",
+            "description": "A collection of images showcasing our coworking space, events, and meeting rooms.",
+            "url": "https://cc-hub.com/gallery"
+          })}
+        </script>
       </Helmet>
 
       <Layout>

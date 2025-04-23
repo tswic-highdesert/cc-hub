@@ -9,6 +9,7 @@ import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 import { BLOCKS, MARKS } from '@contentful/rich-text-types';
 import { RecommendedBlogs } from '../components/RecommendedBlogs';
 import { Calendar, Tag } from 'lucide-react';
+import { Helmet } from 'react-helmet-async';
 
 const richTextOptions = {
   renderNode: {
@@ -99,6 +100,33 @@ export default function BlogPost() {
     );
   }
 
+  const canonicalUrl = `https://cc-hub.com/blog/${slug}`;
+  const jsonLdObject = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": post.title,
+    "description": post.excerpt || post.content?.content?.[0]?.content?.[0]?.value?.substring(0, 150) || "",
+    "image": post.featuredImage,
+    "author": {
+      "@type": "Person",
+      "name": post.author
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Co-Create Innovation Hub",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://images.ctfassets.net/472n3jj0rqks/5DVTh80kNoaqqQtwbyBHCY/3f35fc4e6e8cf22e4d139a08eef2966c/CoCreateInnovHub_Logo.png"
+      }
+    },
+    "datePublished": post.publishDate,
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": canonicalUrl
+    }
+  };
+  const jsonLdString = JSON.stringify(jsonLdObject);
+
   const formattedDate = new Date(post.publishDate).toLocaleDateString('en-US', {
     year: 'numeric',
     month: 'long',
@@ -106,89 +134,103 @@ export default function BlogPost() {
   });
 
   return (
-    <Layout>
-      <div className="bg-gradient-to-br from-[#f0f7fc] to-white py-20">
-        <div className="container mx-auto px-4">
-          <div className="grid lg:grid-cols-[1fr,320px] gap-12 max-w-7xl mx-auto">
-            <motion.article
-              variants={staggerContainer}
-              initial="hidden"
-              animate="show"
-            >
-              {post.featuredImage && (
-                <motion.div
-                  variants={fadeIn}
-                  className="aspect-[21/9] rounded-xl overflow-hidden mb-8"
-                >
-                  <img
-                    src={post.featuredImage}
-                    alt={post.title}
-                    className="w-full h-full object-cover"
-                  />
-                </motion.div>
-              )}
+    <>
+      <Helmet>
+        <title>{post.title} | Co-Create Innovation Hub</title>
+        <meta name="description" content={post.excerpt || post.content?.content?.[0]?.content?.[0]?.value?.substring(0, 150) || ""} />
+        <link rel="canonical" href={canonicalUrl} />
+        <meta property="og:title" content={post.title} />
+        <meta property="og:description" content={post.excerpt || post.content?.content?.[0]?.content?.[0]?.value?.substring(0, 150) || ""} />
+        <meta property="og:image" content={post.featuredImage} />
+        <meta property="og:url" content={canonicalUrl} />
+        <meta property="og:type" content="article" />
+        <script type="application/ld+json">{jsonLdString}</script>
+      </Helmet>
 
-              <motion.div variants={fadeIn} className="space-y-6">
-                <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 rounded-full bg-primary-light text-primary flex items-center justify-center font-semibold text-lg">
-                    {post.author.charAt(0)}
-                  </div>
-                  <div>
-                    <span className="block font-medium text-gray-900">
-                      {post.author}
-                    </span>
-                    <div className="flex items-center gap-2 text-sm text-gray-500">
-                      <Calendar className="w-4 h-4" />
-                      {formattedDate}
+      <Layout>
+        <div className="bg-gradient-to-br from-[#f0f7fc] to-white py-20">
+          <div className="container mx-auto px-4">
+            <div className="grid lg:grid-cols-[1fr,320px] gap-12 max-w-7xl mx-auto">
+              <motion.article
+                variants={staggerContainer}
+                initial="hidden"
+                animate="show"
+              >
+                {post.featuredImage && (
+                  <motion.div
+                    variants={fadeIn}
+                    className="aspect-[21/9] rounded-xl overflow-hidden mb-8"
+                  >
+                    <img
+                      src={post.featuredImage}
+                      alt={post.title}
+                      className="w-full h-full object-cover"
+                    />
+                  </motion.div>
+                )}
+
+                <motion.div variants={fadeIn} className="space-y-6">
+                  <div className="flex items-center gap-4">
+                    <div className="w-12 h-12 rounded-full bg-primary-light text-primary flex items-center justify-center font-semibold text-lg">
+                      {post.author.charAt(0)}
+                    </div>
+                    <div>
+                      <span className="block font-medium text-gray-900">
+                        {post.author}
+                      </span>
+                      <div className="flex items-center gap-2 text-sm text-gray-500">
+                        <Calendar className="w-4 h-4" />
+                        {formattedDate}
+                      </div>
                     </div>
                   </div>
-                </div>
 
-                <h1 className="text-4xl md:text-5xl font-bold text-gray-900">
-                  {post.title}
-                </h1>
+                  <h1 className="text-4xl md:text-5xl font-bold text-gray-900">
+                    {post.title}
+                  </h1>
 
-                {post.tags && post.tags.length > 0 && (
-                  <div className="flex items-center gap-2 flex-wrap">
-                    <Tag className="w-4 h-4 text-gray-400" />
-                    {post.tags.map(tag => (
-                      <span
-                        key={tag}
-                        className="text-sm text-gray-500"
-                      >
-                        #{tag}
-                      </span>
-                    ))}
-                  </div>
-                )}
-
-                <div className="prose prose-lg max-w-none">
-                  {post.content ? documentToReactComponents(post.content, richTextOptions) : (
-                    <p className="text-gray-600">No content available.</p>
+                  {post.tags && post.tags.length > 0 && (
+                    <div className="flex items-center gap-2 flex-wrap">
+                      <Tag className="w-4 h-4 text-gray-400" />
+                      {post.tags.map(tag => (
+                        <span
+                          key={tag}
+                          className="text-sm text-gray-500"
+                        >
+                          #{tag}
+                        </span>
+                      ))}
+                    </div>
                   )}
-                </div>
 
-                {post.videoUrl && (
-                  <div className="mt-8">
-                    <VideoEmbed
-                      src={post.videoUrl}
-                      title={post.title}
-                    />
+                  <div className="prose prose-lg max-w-none">
+                    {post.content ? documentToReactComponents(post.content, richTextOptions) : (
+                      <p className="text-gray-600">No content available.</p>
+                    )}
                   </div>
-                )}
-              </motion.div>
-            </motion.article>
 
-            {/* Sidebar */}
-            <aside className="lg:sticky lg:top-24 space-y-8 h-fit">
-              <RecommendedBlogs
-                currentPostId={post.id}
-                tags={post.tags}
-              />
-            </aside>
+                  {post.videoUrl && (
+                    <div className="mt-8">
+                      <VideoEmbed
+                        src={post.videoUrl}
+                        title={post.title}
+                      />
+                    </div>
+                  )}
+                </motion.div>
+              </motion.article>
+
+              {/* Sidebar */}
+              <aside className="lg:sticky lg:top-24 space-y-8 h-fit">
+                <RecommendedBlogs
+                  currentPostId={post.id}
+                  tags={post.tags}
+                />
+              </aside>
+            </div>
           </div>
         </div>
-      </div>
-    </Layout>
+      </Layout>
+    </>
   );
 }

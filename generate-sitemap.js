@@ -43,7 +43,7 @@ const ACCESS_TOKEN = process.env.VITE_CONTENTFUL_ACCESS_TOKEN || '';
 
   // Finalize sitemap
   sitemap.end();
-  await streamToPromise(writeStream);
+  await streamToPromise(sitemap);
   console.log('Sitemap.xml created successfully');
 }
 

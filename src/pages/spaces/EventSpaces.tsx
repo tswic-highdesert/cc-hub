@@ -32,19 +32,19 @@ const benefits = [
     icon: Users,
     title: 'Flexible Capacity',
     description: 'Accommodates up to 72 people with various seating arrangements.',
-    imageUrl: 'https://images.unsplash.com/photo-1505373877841-8d25f7d46678?auto=format&fit=crop&q=80&w=800'
+    imageId: '1sker7BQw6u6lIrERR0idH'
   },
   {
     icon: Tv2,
     title: 'Premium AV Setup',
     description: 'State-of-the-art audio/visual equipment for impactful presentations.',
-    imageUrl: 'https://images.unsplash.com/photo-1431540015161-0bf868a2d407?auto=format&fit=crop&q=80&w=800'
+    imageId: '6Sd90wXkKrVxEzw4Gixkun'
   },
   {
     icon: Coffee,
     title: 'Full Service',
     description: 'Catering Kitchen, Event Support Checklists available',
-    imageUrl: 'https://images.unsplash.com/photo-1505373877841-8d25f7d46678?auto=format&fit=crop&q=80&w=800'
+    imageId: '1Fo36la7no5ayIV0wnZ3KJ'
   }
 ];
 

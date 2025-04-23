@@ -32,19 +32,19 @@ const benefits = [
     icon: Users,
     title: 'Vibrant Community',
     description: 'Join a diverse network of professionals, entrepreneurs, and creatives.',
-    imageId: '4jYpqH56JEfCeG2yU1TdEr'
+    imageId: '6IDGTXpMxziH7EPdmJBHvf'
   },
   {
     icon: Clock,
     title: 'Flexible Access',
     description: 'Work on your schedule with plans that fit your needs.',
-    imageId: '4L7vpgHIV0s9hWyHUZkXw0'
+    imageId: '5O7qPvMN7yjrzTC4wwy7X8'
   },
   {
     icon: Zap,
     title: 'Productivity Boost',
     description: 'Everything you need to stay focused and productive.',
-    imageId: '1aQm8phbQ7fWBOGYmPN929'
+    imageId: '17G4xvP87H4sIs6buykNHf'
   }
 ];
 

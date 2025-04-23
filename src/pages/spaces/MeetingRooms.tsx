@@ -31,19 +31,19 @@ const benefits = [
     icon: Monitor,
     title: 'Professional Setup',
     description: 'State-of-the-art AV equipment and presentation tools.',
-    imageUrl: 'https://images.unsplash.com/photo-1431540015161-0bf868a2d407?auto=format&fit=crop&q=80&w=800'
+    imageId: 'WuLJ5QyhcW9Z9aVBHjQIz'
   },
   {
     icon: Users,
     title: 'Flexible Capacity',
     description: 'Rooms for 4 to 12 people with configurable layouts.',
-    imageUrl: 'https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&q=80&w=800'
+    imageId: '31KTSitp6rKVJUpF5KtsA'
   },
   {
     icon: Calendar,
     title: 'Easy Booking',
     description: 'Simple online booking system with instant confirmation.',
-    imageUrl: 'https://images.unsplash.com/photo-1505373877841-8d25f7d46678?auto=format&fit=crop&q=80&w=800'
+    imageId: 'plfGEQ1Po6uugoTY81OTt'
   }
 ];
 

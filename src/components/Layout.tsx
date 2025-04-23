@@ -187,7 +187,7 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
         <nav className={`${components.container} py-6 flex items-center justify-between relative`}>
           <Link to="/" className="flex items-center gap-2">
             <ContentfulImage
-              id="5DVTh80kNoaqqQtwbyBHCY"
+              id="2Wq1knuqCiD7o6jyZ4sqOd"
               alt={`${businessConfig.name} logo`}
               className="w-12 h-12"
             />
@@ -267,7 +267,7 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
             <div>
               <div className="flex items-center gap-2 text-white mb-4">
                 <ContentfulImage
-                  id="6ZOUMNzfhgnGJQKMV5V2d0"
+                  id="3rQp72fT86Zr1HCXwgFZwN"
                   alt={`${businessConfig.name} logo`}
                   className="w-10 h-10"
                 />

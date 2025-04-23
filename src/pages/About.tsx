@@ -133,7 +133,7 @@ export default function About() {
               className="relative aspect-square rounded-2xl overflow-hidden"
             >
              <ContentfulImage
-                id="4Nb3qb1J2EqZv0jY6I3bDK"
+                id="39gioIcVu9tLd2Cvi8F9fd"
                 className="w-full h-full object-cover"
               />
             </motion.div>

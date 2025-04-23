@@ -31,19 +31,19 @@ const benefits = [
     icon: Lock,
     title: 'Private & Secure',
     description: 'Your own lockable office space with 24/7 secure access.',
-    imageId: '4x82OdEaKJdKN6E2ZL1BR0'
+    imageId: '1D973euzgavy7gjCp8tay5'
   },
   {
     icon: Users,
     title: 'Team Friendly',
     description: 'Flexible spaces that grow with your team.',
-    imageId: '6Gr55yi0pHTn0jlaNXLj9N'
+    imageId: '6tF9k5BjbQqMi7SOZ9GO2q'
   },
   {
     icon: Shield,
     title: 'Professional Image',
     description: 'Meet clients, host meetings, and be presented with a professional image all around.',
-    imageId: '6lurCHkNtgGHOxXp6kUCOr'
+    imageId: 'WuLJ5QyhcW9Z9aVBHjQIz'
   }
 ];
 

@@ -6,7 +6,7 @@ const BASE_URL = 'https://cc-hub.com';
 
 async function generateSitemap() {
   const sitemap = new SitemapStream({ hostname: BASE_URL });
-  const writeStream = createWriteStream('./public/sitemap.xml');
+  const writeStream = createWriteStream('./dist/sitemap.xml');
   sitemap.pipe(writeStream);
 
   // Static Pages

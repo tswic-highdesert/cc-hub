@@ -26,6 +26,7 @@ import { useSuccessStories } from '../hooks/useSuccessStories';
 import { useBlogPosts } from '../hooks/useBlog';
 import { UseCase } from '../components/spaces/UseCase';
 import ArchieEvents from '../components/ArchieEvents';
+import { logEvent } from '../lib/analytics';
 
 const features = [
   {
@@ -83,7 +84,10 @@ export default function Home() {
           <Button
             variant="white"
             size="lg"
-            onClick={() => navigate('/tour')} // Use navigate
+            onClick={() => {
+              logEvent('Button', 'Click', 'Book a Tour');
+              navigate('/tour');
+            }}
           >
             Book a Tour
             <ArrowRight className="ml-2 w-5 h-5" />
@@ -93,11 +97,12 @@ export default function Home() {
             size="lg"
             className="!text-white !border-white hover:!bg-white hover:!text-[#1f7abc]"
             onClick={() => {
+              logEvent('Button', 'Click', 'View Pricing');
               const pricingSection = document.getElementById('pricing');
               if (pricingSection) {
                 pricingSection.scrollIntoView({ behavior: 'smooth' });
               }
-            }} // Use navigate (or handle scroll differently if needed)
+            }}
           >
             View Pricing
           </Button>
@@ -363,7 +368,10 @@ export default function Home() {
             <Button
               variant="white"
               size="lg"
-              onClick={() => navigate('/tour')} // Use navigate
+              onClick={() => {
+                logEvent('Button', 'Click', 'Schedule Your Tour');
+                navigate('/tour');
+              }}
             >
               Schedule Your Tour
               <ArrowRight className="ml-2 w-5 h-5" />
@@ -371,7 +379,10 @@ export default function Home() {
             <Button
               variant="white"
               size="lg"
-              onClick={() => navigate('/contact')} // Use navigate
+              onClick={() => {
+                logEvent('Button', 'Click', 'Join Today');
+                navigate('/contact');
+              }}
             >
               Join Today
               <ArrowRight className="ml-2 w-5 h-5" />
@@ -380,7 +391,10 @@ export default function Home() {
               variant="outline"
               size="lg"
               className="!text-white !border-white hover:!bg-white hover:!text-[#1f7abc]"
-              onClick={() => navigate('/contact')} // Use navigate
+              onClick={() => {
+                logEvent('Button', 'Click', 'Contact Us');
+                navigate('/contact');
+              }}
             >
               Contact Us
               <ArrowRight className="ml-2 w-5 h-5" />

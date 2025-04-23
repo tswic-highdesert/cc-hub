@@ -27,21 +27,20 @@ export const FaqSection: React.FC<FaqSectionProps> = ({ faqs }) => {
           <button
             className="w-full flex items-center justify-between p-6 text-left"
             onClick={() => setOpenIndex(openIndex === index ? null : index)}
+            aria-expanded={openIndex === index}
+            aria-controls={`faq-answer-${index}`}
           >
             <span className={typography.h4}>
               {faq.question}
             </span>
             <ChevronDown
-              className={`w-5 h-5 text-gray-500 ${animations.hover} ${
-                openIndex === index ? 'rotate-180' : ''
-              }`}
+              className={`w-5 h-5 text-gray-500 ${animations.hover} ${openIndex === index ? 'rotate-180' : ''}`}
+              aria-hidden="true"
             />
           </button>
           <div
-            className={`
-              overflow-hidden ${animations.hover}
-              ${openIndex === index ? 'max-h-96' : 'max-h-0'}
-            `}
+            id={`faq-answer-${index}`}
+            className={`overflow-hidden ${animations.hover} ${openIndex === index ? 'max-h-96' : 'max-h-0'}`}
           >
             <div className="p-6 pt-0 text-gray-600">
               {faq.answer}

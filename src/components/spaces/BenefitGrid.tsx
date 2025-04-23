@@ -37,14 +37,14 @@ export const BenefitGrid: React.FC<BenefitGridProps> = ({ benefits }) => {
               <div className="aspect-video">
                 <ContentfulImage
                   id={benefit.imageId}
-                  alt={benefit.title}
+                  alt={benefit.description || benefit.title}
                   className="w-full h-full object-cover"
                 />
               </div>
             )}
             <div className="p-6">
               <div className="w-12 h-12 bg-primary-light rounded-lg flex items-center justify-center text-primary mb-4">
-                <Icon className="w-6 h-6" />
+                <Icon className="w-6 h-6" aria-hidden="true" />
               </div>
               <h3 className={`${typography.h3} mb-2`}>
                 {benefit.title}

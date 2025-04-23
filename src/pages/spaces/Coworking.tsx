@@ -162,6 +162,20 @@ export default function Coworking() {
             "description": "Flexible coworking spaces with fast internet, vibrant community, and premium amenities in Russellville, AR."
           })}
         </script>
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": faqs.map(faq => ({
+              "@type": "Question",
+              "name": faq.question,
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": faq.answer
+              }
+            }))
+          })}
+        </script>
       </Helmet>
       <Layout>
       <PageHero

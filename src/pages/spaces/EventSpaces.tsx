@@ -147,6 +147,20 @@ export default function EventSpaces() {
             "description": "Versatile event spaces for workshops, presentations, and community gatherings in Russellville, AR."
           })}
         </script>
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": faqs.map(faq => ({
+              "@type": "Question",
+              "name": faq.question,
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": faq.answer
+              }
+            }))
+          })}
+        </script>
       </Helmet>
       <Layout>
       <PageHero

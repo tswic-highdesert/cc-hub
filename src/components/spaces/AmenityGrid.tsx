@@ -39,7 +39,7 @@ export const AmenityGrid: React.FC<AmenityGridProps> = ({ amenities }) => {
               w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0
               ${amenity.isPremium ? 'bg-primary text-white' : 'bg-gray-100 text-gray-600'}
             `}>
-              <Icon className="w-5 h-5" />
+              <Icon className="w-5 h-5" aria-hidden="true" />
             </div>
             <div>
               <h3 className={`${typography.h4} mb-1`}>

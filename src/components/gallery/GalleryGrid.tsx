@@ -55,7 +55,7 @@ export const GalleryGrid: React.FC<GalleryGridProps> = ({
           <div className="aspect-[4/3] overflow-hidden">
             <img
               src={image.imageUrl}
-              alt={image.title}
+              alt={image.description || image.title || 'Gallery image'}
               width={image.width}
               height={image.height}
               className={`w-full h-full object-cover ${animations.scale} group-hover:scale-105`}

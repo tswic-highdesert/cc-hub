@@ -30,7 +30,7 @@ const ArchieEvents: React.FC = () => {
       console.log('[Events] Fetching events...');
       try {
         const res = await axios.get(
-          `https://api.archieapp.co/v1/spaces/${import.meta.env.VITE_ARCHIE_SPACE_DOMAIN}/events`,
+          `https://api.archieapp.co/v1/spaces/${import.meta.env.VITE_ARCHIE_SPACE_DOMAIN}/events?withEnded=true`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -72,7 +72,7 @@ const ArchieEvents: React.FC = () => {
         {upcomingEvents.length > 0 ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {upcomingEvents.slice(0, 3).map((event) => (
-              <EventCard key={event.uuid} {...event} />
+              <EventCard key={event.uuid} {...event} hideDescription={true} />
             ))}
           </div>
         ) : (

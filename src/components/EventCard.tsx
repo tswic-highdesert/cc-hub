@@ -4,11 +4,12 @@ import { Button } from './Button'; // Import Button component
 interface EventCardProps {
   uuid: string;
   title: string;
-  description: string;
+  description?: string;
   start_date: string;
   end_date: string;
   slug: string;
   cover?: string;
+  hideDescription?: boolean;
 }
 
 const fallbackCover = 'https://placehold.co/600x300?text=No+Image';
@@ -21,6 +22,7 @@ const EventCard: React.FC<EventCardProps> = ({
   end_date,
   slug,
   cover,
+  hideDescription = false,
 }) => {
   const space = import.meta.env.VITE_ARCHIE_SPACE_DOMAIN;
   const eventUrl = `https://archieapp.co/${space}/public/events/${slug}`;
@@ -48,7 +50,9 @@ const EventCard: React.FC<EventCardProps> = ({
       />
       <div className="p-4 flex-1 flex flex-col">
         <h3 className="text-lg font-semibold mb-1">{title}</h3>
-        <p className="text-sm text-gray-600 flex-1">{description}</p>
+        {!hideDescription && (
+          <p className="text-sm text-gray-600 flex-1">{description}</p>
+        )}
         <p className="text-sm text-gray-500 mt-2">
           {formatDate(start_date)} — {formatDate(end_date)}
         </p>
